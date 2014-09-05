@@ -76,3 +76,33 @@ t <- 94.32
 lambda <- x/t
 round(lambda + c(-1, 1) * qnorm(0.975) * sqrt(lambda/t), 3)
 poisson.test(x, T = 94.32)$conf
+
+lambdavals <- seq(0.005, 0.1, by = 0.01)
+nosim <- 1000
+t <- 100
+coverage <- sapply(lambdavals, function(lambda) {
+    lhats <- rpois(nosim, lambda = lambda * t)/t
+    ll <- lhats - qnorm(0.975) * sqrt(lhats/t)
+    ul <- lhats + qnorm(0.975) * sqrt(lhats/t)
+    mean(ll < lambda & ul > lambda)
+})
+df4 <- data.frame(lambdavals=lambdavals,coverage=coverage)
+g4 <- ggplot(df4,aes(x=lambdavals,y=coverage))
+png('poissonsimulation.png')
+g4 + geom_line(size=2) + geom_hline(yintercept=.95)
+dev.off()
+
+lambdavals <- seq(0.005, 0.1, by = 0.01)
+nosim <- 1000
+t <- 1000
+coverage <- sapply(lambdavals, function(lambda) {
+    lhats <- rpois(nosim, lambda = lambda * t)/t
+    ll <- lhats - qnorm(0.975) * sqrt(lhats/t)
+    ul <- lhats + qnorm(0.975) * sqrt(lhats/t)
+    mean(ll < lambda & ul > lambda)
+})
+df4 <- data.frame(lambdavals=lambdavals,coverage=coverage)
+g4 <- ggplot(df4,aes(x=lambdavals,y=coverage))
+png('poissonsimulation2.png')
+g4 + geom_line(size=2) + geom_hline(yintercept=.95)
+dev.off()
