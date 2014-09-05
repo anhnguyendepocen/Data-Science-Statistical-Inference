@@ -21,3 +21,4 @@ x <- father.son$sheight
 n<-length(x)
 qplot(x)
 round(c(var(x), var(x) / n, sd(x), sd(x) / sqrt(n)),2)
+
