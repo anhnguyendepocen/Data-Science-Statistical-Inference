@@ -88,3 +88,5 @@ rbind(
     t.test(gain ~ Diet, paired = FALSE, var.equal = TRUE, data = wideCW14)$conf,
     t.test(gain ~ Diet, paired = FALSE, var.equal = FALSE, data = wideCW14)$conf
 )
+g1 <- ggplot(ChickWeight, aes(x=Time, y=weight))
+g1 + geom_point()
