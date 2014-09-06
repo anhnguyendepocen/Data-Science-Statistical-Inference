@@ -75,4 +75,16 @@ rbind(
     t.test(g2, g1, paired = TRUE)$conf
 )
 
-# Click weight
+# Chick weight
+library(datasets); data(ChickWeight); library(reshape2)
+##define weight gain or loss
+head(ChickWeight)
+wideCW <- dcast(ChickWeight, Diet + Chick ~ Time, value.var = "weight")
+names(wideCW)[-(1 : 2)] <- paste("time", names(wideCW)[-(1 : 2)], sep = "")
+library(dplyr)
+wideCW <- mutate(wideCW, gain = time21 - time0)
+wideCW14 <- subset(wideCW, Diet %in% c(1, 4))
+rbind(
+    t.test(gain ~ Diet, paired = FALSE, var.equal = TRUE, data = wideCW14)$conf,
+    t.test(gain ~ Diet, paired = FALSE, var.equal = FALSE, data = wideCW14)$conf
+)
