@@ -11,6 +11,7 @@ This is a basic statistical inference data analysis. In this report, we're going
 # Setup and run the simulation
 setwd('C:\\Users\\Ivan.Liuyanfeng\\Desktop\\Data_Mining_Work_Space\\Data-Science-Statistical-Inference\\project')
 library(ggplot2)
+library(datasets)
 ```
 
 ---
@@ -19,8 +20,16 @@ library(ggplot2)
 Load the ToothGrowth data and perform some basic exploratory data analyses
 
 ```{r, warning=FALSE, message=FALSE, fig.height=4,fig.width=8,fig.align='center'}
-
+data(ToothGrowth)
+head(ToothGrowth)
+g1 <- ggplot(ToothGrowth, aes(x=factor(dose),y=len,fill=factor(dose)))
+g1 + geom_boxplot(notch=T) + facet_grid(.~supp) + 
+    scale_x_discrete("Dosage in mg") + 
+    scale_y_continuous("Length of Teeth") + 
+    ggtitle("Exploratory data analyses")
 ```
+
+The above diagram reveals that longer teeth tend to use higher dosage.
 
 ---
 
