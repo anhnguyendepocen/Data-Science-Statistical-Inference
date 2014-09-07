@@ -1,0 +1,76 @@
+---
+title: "Statistical Inference Project One - Simulation"
+author: "Tianxiang Liu"
+date: "Sunday, September 07, 2014"
+output: html_document
+---
+
+The exponential distribution can be simulated in R with rexp(n, lambda) where lambda is the rate parameter. The mean of exponential distribution is 1/lambda and the standard deviation is also also 1/lambda. Set lambda = 0.2 for all of the simulations. In this simulation, we will investigate the distribution of averages of 40 exponential(0.2)s. Note that we will need to do a thousand or so simulated averages of 40 exponentials.
+
+```{r}
+# Setup and run the simulation
+setwd('C:\\Users\\Ivan.Liuyanfeng\\Desktop\\Data_Mining_Work_Space\\Data-Science-Statistical-Inference\\project')
+library(ggplot2)
+lambda <- 0.2
+n <- 40
+itr <- 1000
+set.seed(1234)
+sim <- replicate(itr, rexp(n,lambda))
+```
+
+---
+
+### Section One
+Show where the distribution is centered at and compare it to the theoretical center of the distribution.
+
+```{r, warning=FALSE, message=FALSE, fig.height=4,fig.width=8,fig.align='center'}
+sim.mean <- sapply(1:itr, function(i) mean(sim[,i]))
+# Calculated mean and theoretical mean
+s1 <- data.frame('mean'=c(mean(sim.mean),1/lambda), row.names=c('calculated','theoretical'))
+s1
+```
+
+---
+
+### Section Two
+Show how variable it is and compare it to the theoretical variance of the distribution.
+
+```{r, warning=FALSE, message=FALSE, fig.height=4,fig.width=8,fig.align='center'}
+sim.sd <- sd(as.vector(sim.mean))
+sim.var <- var(as.vector(sim.mean))
+theo.sd <- (1/lambda * 1/sqrt(n))
+theo.var <- theo.sd ^ 2
+# Calculated sd, var and theoretical sd, var
+s2 <- data.frame('sd'=c(sim.sd, theo.sd), 'var'=c(sim.var,theo.var), row.names=c('calculated','theoretical'))
+s2
+```
+
+---
+
+### Section Three
+Show that the distribution is approximately normal.
+
+```{r, warning=FALSE, message=FALSE, fig.height=4,fig.width=8,fig.align='center'}
+# Density Plot
+sim.mean <- as.data.frame(sim.mean)
+g <- ggplot(sim.mean,aes(x=sim.mean))
+g + geom_histogram(aes(y = ..density..),fill='lightblue',alpha=.8) + 
+    geom_vline(data=s1, aes(xintercept=mean), color=c('blue','red')) + 
+    geom_density(alpha=.1, fill='red') + 
+    stat_function(fun=dnorm, args=list(mean=mean(sim.mean[,1]), sd=sim.sd),color = "darkblue")
+```
+
+We can see the shape of density plot of simulation is almost identical to the shape of normal distribution (which is dark blue line in the diagram).
+
+---
+
+### Section Four
+Evaluate the coverage of the confidence interval for 1/lambda: X¯±1.96Sn√.
+
+```{r, warning=FALSE, message=FALSE, fig.height=4,fig.width=8,fig.align='center'}
+
+```
+
+---
+
+Thank you for reading!
