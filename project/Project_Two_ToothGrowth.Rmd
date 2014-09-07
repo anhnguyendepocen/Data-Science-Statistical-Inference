@@ -1,0 +1,52 @@
+---
+title: "Statistical Inference Project Two - ToothGrowth"
+author: "Ivan Liu"
+date: "Sunday, September 07, 2014"
+output: html_document
+---
+
+This is a basic statistical inference data analysis. In this report, we're going to analyze the ToothGrowth data in the R datasets package. 
+
+```{r, warning=FALSE, message=FALSE, fig.height=4,fig.width=8,fig.align='center'}
+# Setup and run the simulation
+setwd('C:\\Users\\Ivan.Liuyanfeng\\Desktop\\Data_Mining_Work_Space\\Data-Science-Statistical-Inference\\project')
+library(ggplot2)
+```
+
+---
+
+### Section One
+Load the ToothGrowth data and perform some basic exploratory data analyses
+
+```{r, warning=FALSE, message=FALSE, fig.height=4,fig.width=8,fig.align='center'}
+
+```
+
+---
+
+### Section Two
+Provide a basic summary of the data.
+
+```{r, warning=FALSE, message=FALSE, fig.height=4,fig.width=8,fig.align='center'}
+
+```
+
+---
+
+### Section Three
+Use confidence intervals and hypothesis tests to compare tooth growth by supp and dose. (Use the techniques from class even if there's other approaches worth considering)
+
+```{r, warning=FALSE, message=FALSE, fig.height=4,fig.width=8,fig.align='center'}
+
+```
+
+---
+
+### Section Four
+State your conclusions and the assumptions needed for your conclusions. 
+
+```{r, warning=FALSE, message=FALSE, fig.height=4,fig.width=8,fig.align='center'}
+
+```
+
+---
