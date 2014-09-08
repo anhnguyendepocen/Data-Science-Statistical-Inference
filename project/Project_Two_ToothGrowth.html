@@ -118,11 +118,34 @@ supp.result</code></pre>
 ## Equal Var   0.06039   -0.167     7.567
 ## Unequal Var 0.06063   -0.171     7.571</code></pre>
 <p>We can see that, in terms of supplements (Orange Juice &amp; Vitamin C), the p values of both equal variance and unequal variance t tests are larger than 5 percent and the confidence intervals of both t tests contain 0. So we cannot deny null hypothesis. So we cannot conclude that there are differences between OJ and VC groups.</p>
+<pre class="r"><code>dose.05 &lt;- ToothGrowth[which(ToothGrowth$dose==.5),1]
+dose.10 &lt;- ToothGrowth[which(ToothGrowth$dose==1),1]
+dose.20 &lt;- ToothGrowth[which(ToothGrowth$dose==2),1]
+dose0510.t1 &lt;- t.test(dose.05, dose.10, paired=F, var.equal=T)
+dose0510.t2 &lt;- t.test(dose.05, dose.10, paired=F, var.equal=F)
+dose0510.result &lt;- data.frame(&quot;p-value&quot;=c(dose0510.t1$p.value, dose0510.t2$p.value),&quot;Conf-Low&quot;=c(dose0510.t1$conf[1],dose0510.t2$conf[1]),&quot;Conf-High&quot;=c(dose0510.t1$conf[2],dose0510.t2$conf[2]), row.names=c(&quot;Equal Var&quot;,&quot;Unequal Var&quot;), &quot;Dose&quot;=&quot;0.5 to 1&quot;)
+dose0520.t1 &lt;- t.test(dose.05, dose.20, paired=F, var.equal=T)
+dose0520.t2 &lt;- t.test(dose.05, dose.20, paired=F, var.equal=F)
+dose0520.result &lt;- data.frame(&quot;p-value&quot;=c(dose0520.t1$p.value, dose0520.t2$p.value),&quot;Conf-Low&quot;=c(dose0520.t1$conf[1],dose0520.t2$conf[1]),&quot;Conf-High&quot;=c(dose0520.t1$conf[2],dose0520.t2$conf[2]), row.names=c(&quot;Equal Var&quot;,&quot;Unequal Var&quot;), &quot;Dose&quot;=&quot;0.5 to 2&quot;)
+dose1020.t1 &lt;- t.test(dose.10, dose.20, paired=F, var.equal=T)
+dose1020.t2 &lt;- t.test(dose.10, dose.20, paired=F, var.equal=F)
+dose1020.result &lt;- data.frame(&quot;p-value&quot;=c(dose1020.t1$p.value, dose1020.t2$p.value),&quot;Conf-Low&quot;=c(dose1020.t1$conf[1],dose1020.t2$conf[1]),&quot;Conf-High&quot;=c(dose1020.t1$conf[2],dose1020.t2$conf[2]), row.names=c(&quot;Equal Var&quot;,&quot;Unequal Var&quot;), &quot;Dose&quot;=&quot;1 to 2&quot;)
+dose.result &lt;- rbind(dose0510.result,dose0520.result,dose1020.result)
+dose.result</code></pre>
+<pre><code>##                p.value Conf.Low Conf.High     Dose
+## Equal Var    1.266e-07  -11.984    -6.276 0.5 to 1
+## Unequal Var  1.268e-07  -11.984    -6.276 0.5 to 1
+## Equal Var1   2.838e-14  -18.154   -12.836 0.5 to 2
+## Unequal Var1 4.398e-14  -18.156   -12.834 0.5 to 2
+## Equal Var2   1.811e-05   -8.994    -3.736   1 to 2
+## Unequal Var2 1.906e-05   -8.996    -3.734   1 to 2</code></pre>
+<p>From table above, we can see that the dosages do have impact on tooth growth. All of p values are very small and the confidence intervals do not contain zero. So we can deny the null hypthesis and conclude that true difference in means is not equal to 0 among the groups with different dosages. It is clear to see that higher dosage tends to result in higher tooth length.</p>
 <hr />
 </div>
 <div id="section-four" class="section level3">
 <h3>Section Four</h3>
 <p>State your conclusions and the assumptions needed for your conclusions.</p>
+<p>To recap, based on the analysis above, we can conclude that across supplements for each dose, 2mg dose has larger impact on tooth growth than 1mg and 0.5mg, and 1mg dose has more impact than 0.5mg dose. While we cannot say that orange juice and vitamin C have obvious different impact on tooth growth.</p>
 <hr />
 <p><b>Thank you for reading!</b></br> <b>Ivan Liu</b></br> <b>07/09/2014</b></br></p>
 </div>

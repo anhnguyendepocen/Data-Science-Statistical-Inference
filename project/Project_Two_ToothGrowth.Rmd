@@ -59,14 +59,32 @@ supp.result
 
 We can see that, in terms of supplements (Orange Juice & Vitamin C), the p values of both equal variance and unequal variance t tests are larger than 5 percent and the confidence intervals of both t tests contain 0. So we cannot deny null hypothesis. So we cannot conclude that there are differences between OJ and VC groups.
 
+```{r, warning=FALSE, message=FALSE, fig.height=4,fig.width=8,fig.align='center'}
+dose.05 <- ToothGrowth[which(ToothGrowth$dose==.5),1]
+dose.10 <- ToothGrowth[which(ToothGrowth$dose==1),1]
+dose.20 <- ToothGrowth[which(ToothGrowth$dose==2),1]
+dose0510.t1 <- t.test(dose.05, dose.10, paired=F, var.equal=T)
+dose0510.t2 <- t.test(dose.05, dose.10, paired=F, var.equal=F)
+dose0510.result <- data.frame("p-value"=c(dose0510.t1$p.value, dose0510.t2$p.value),"Conf-Low"=c(dose0510.t1$conf[1],dose0510.t2$conf[1]),"Conf-High"=c(dose0510.t1$conf[2],dose0510.t2$conf[2]), row.names=c("Equal Var","Unequal Var"), "Dose"="0.5 to 1")
+dose0520.t1 <- t.test(dose.05, dose.20, paired=F, var.equal=T)
+dose0520.t2 <- t.test(dose.05, dose.20, paired=F, var.equal=F)
+dose0520.result <- data.frame("p-value"=c(dose0520.t1$p.value, dose0520.t2$p.value),"Conf-Low"=c(dose0520.t1$conf[1],dose0520.t2$conf[1]),"Conf-High"=c(dose0520.t1$conf[2],dose0520.t2$conf[2]), row.names=c("Equal Var","Unequal Var"), "Dose"="0.5 to 2")
+dose1020.t1 <- t.test(dose.10, dose.20, paired=F, var.equal=T)
+dose1020.t2 <- t.test(dose.10, dose.20, paired=F, var.equal=F)
+dose1020.result <- data.frame("p-value"=c(dose1020.t1$p.value, dose1020.t2$p.value),"Conf-Low"=c(dose1020.t1$conf[1],dose1020.t2$conf[1]),"Conf-High"=c(dose1020.t1$conf[2],dose1020.t2$conf[2]), row.names=c("Equal Var","Unequal Var"), "Dose"="1 to 2")
+dose.result <- rbind(dose0510.result,dose0520.result,dose1020.result)
+dose.result
+```
+
+From table above, we can see that the dosages do have impact on tooth growth. All of p values are very small and the confidence intervals do not contain zero. So we can deny the null hypthesis and conclude that true difference in means is not equal to 0 among the groups with different dosages. It is clear to see that higher dosage tends to result in higher tooth length.
+
+
 ---
 
 ### Section Four
 State your conclusions and the assumptions needed for your conclusions. 
 
-```{r, warning=FALSE, message=FALSE, fig.height=4,fig.width=8,fig.align='center'}
-
-```
+To recap, based on the analysis above, we can conclude that across supplements for each dose, 2mg dose has larger impact on tooth growth than 1mg and 0.5mg, and 1mg dose has more impact than 0.5mg dose. While we cannot say that orange juice and vitamin C have obvious different impact on tooth growth.
 
 ---
 
