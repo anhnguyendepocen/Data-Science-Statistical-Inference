@@ -89,6 +89,21 @@ g1 + geom_boxplot(notch=T) + facet_grid(.~supp) +
 <div id="section-two" class="section level3">
 <h3>Section Two</h3>
 <p>Provide a basic summary of the data.</p>
+<pre class="r"><code>ToothGrowth$dose &lt;- as.factor(ToothGrowth$dose)
+summary(ToothGrowth)</code></pre>
+<pre><code>##       len       supp     dose   
+##  Min.   : 4.2   OJ:30   0.5:20  
+##  1st Qu.:13.1   VC:30   1  :20  
+##  Median :19.2           2  :20  
+##  Mean   :18.8                   
+##  3rd Qu.:25.3                   
+##  Max.   :33.9</code></pre>
+<pre class="r"><code>table(ToothGrowth$supp, ToothGrowth$dose)</code></pre>
+<pre><code>##     
+##      0.5  1  2
+##   OJ  10 10 10
+##   VC  10 10 10</code></pre>
+<p>We can see there are two supplements (OJ and VC) and three kinds of dose (0.5, 1, 2) in this dataset.</p>
 <hr />
 </div>
 <div id="section-three" class="section level3">

@@ -37,10 +37,12 @@ The above diagram reveals that longer teeth tend to use higher dosage.
 Provide a basic summary of the data.
 
 ```{r, warning=FALSE, message=FALSE, fig.height=4,fig.width=8,fig.align='center'}
-library(reshape2)
+ToothGrowth$dose <- as.factor(ToothGrowth$dose)
 summary(ToothGrowth)
-
+table(ToothGrowth$supp, ToothGrowth$dose)
 ```
+
+We can see there are two supplements (OJ and VC) and three kinds of dose (0.5, 1, 2) in this dataset. 
 
 ---
 
