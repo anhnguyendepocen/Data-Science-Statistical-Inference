@@ -50,8 +50,14 @@ We can see there are two supplements (OJ and VC) and three kinds of dose (0.5, 1
 Use confidence intervals and hypothesis tests to compare tooth growth by supp and dose. (Use the techniques from class even if there's other approaches worth considering)
 
 ```{r, warning=FALSE, message=FALSE, fig.height=4,fig.width=8,fig.align='center'}
-
+supp.t1 <- t.test(len~supp, paired=F, var.equal=T, data=ToothGrowth)
+supp.t2 <- t.test(len~supp, paired=F, var.equal=F, data=ToothGrowth)
+supp.result <- data.frame("p-value"=c(supp.t1$p.value, supp.t2$p.value),"Conf-Low"=c(supp.t1$conf[1],supp.t2$conf[1]),
+                          "Conf-High"=c(supp.t1$conf[2],supp.t2$conf[2]), row.names=c("Equal Var","Unequal Var"))
+supp.result
 ```
+
+We can see that, in terms of supplements (Orange Juice & Vitamin C), the p values of both equal variance and unequal variance t tests are larger than 5 percent and the confidence intervals of both t tests contain 0. So we cannot deny null hypothesis. So we cannot conclude that there are differences between OJ and VC groups.
 
 ---
 
